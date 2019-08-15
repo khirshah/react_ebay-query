@@ -1,8 +1,15 @@
+//----------------------- IMPORT --------------------------------------
+//----------------------- React -----------------------------------
 import React, { Component} from "react";
-import "./searchContainer.css";
+
+//------------------------- styles --------------------------------
+import styles from "./searchContainer.css";
+
+//---------------------- components -------------------------------
 import SearchRow from "./SearchRow.js"
 import Button from "./Button.js"
 
+//---------------------- COMPONENT -------------------------------
 export default class SearchContainer extends Component{
     state = {
       searchRows: ["item"]
@@ -29,7 +36,7 @@ export default class SearchContainer extends Component{
 
   render() {
     return (
-        <div>
+        <div className={styles.searchContainer}>
           {this.createSearchRows()}
           <Button onclick={this.handleAddSearchRow.bind(this)} label="More"/>
           <Button onclick={this.handleRemoveSearchRow.bind(this)} label="Less"/>

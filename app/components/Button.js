@@ -1,6 +1,11 @@
+//----------------------- IMPORT --------------------------------------
+//----------------------- React -----------------------------------
 import React, { Component} from "react";
-import "./button.css";
 
+//------------------------- styles --------------------------------
+import styles from "./button.css";
+
+//---------------------- COMPONENT -------------------------------
 export default class Button extends Component{
   render() {
     return (

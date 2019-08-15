@@ -1,12 +1,19 @@
+//----------------------- IMPORT --------------------------------------
+//----------------------- React -----------------------------------
 import React, { Component} from "react";
-import "./searchRow.css";
+
+//------------------------- styles --------------------------------
+import styles from "./searchRow.css";
+
+//---------------------- components -------------------------------
 import InputField from "./InputField.js"
 import DropDown from "./DropDown.js"
 
+//---------------------- COMPONENT -------------------------------
 export default class SearchRow extends Component{
   render() {
     return (
-        <div>
+        <div className={styles.searchRow}>
           <InputField/>
           <DropDown/>
         </div>
