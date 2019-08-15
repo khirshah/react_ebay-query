@@ -19,10 +19,13 @@ export default class App extends Component{
 
   render(){
     return(
-      <div className="App">
-        {this.state.displayMode == "search" ? <SearchContainer/> : null}
-        {this.state.displayMode == "search" ? <Button label="Search"/>: null}
-        {this.state.displayMode != "search" ? <SearchResults content="These are the results"/> : null}
+      <div className={styles.app}>
+        <div className={styles.appContainer}>
+          <div className={styles.appTitle}>Ebay Search</div>
+          {this.state.displayMode == "search" ? <SearchContainer/> : null}
+          {this.state.displayMode == "search" ? <Button className={styles.searchButton} label="Search"/>: null}
+          {this.state.displayMode != "search" ? <SearchResults content="These are the results"/> : null}
+        </div>
       </div>
     );
   }

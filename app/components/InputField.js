@@ -9,7 +9,7 @@ import styles from "./inputField.css";
 export default class InputField extends Component{
   render() {
     return (
-      <input placeholder={this.props.placeholder}></input>
+      <input className={styles.inputField} placeholder={this.props.placeholder}></input>
       )
   } 
 }

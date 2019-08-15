@@ -38,8 +38,10 @@ export default class SearchContainer extends Component{
     return (
         <div className={styles.searchContainer}>
           {this.createSearchRows()}
-          <Button onclick={this.handleAddSearchRow.bind(this)} label="More"/>
-          <Button onclick={this.handleRemoveSearchRow.bind(this)} label="Less"/>
+          <div className={styles.buttonsContainer}>
+          <Button className={styles.btn} onclick={this.handleAddSearchRow.bind(this)} label="More"/>
+          <Button className={styles.btn} onclick={this.handleRemoveSearchRow.bind(this)} label="Less"/>
+          </div>
         </div>
       )
   } 
