@@ -9,7 +9,7 @@ import styles from "./searchResults.css";
 export default class SearchResults extends Component{
   render() {
     return (
-      <div>{this.props.content}</div>
-      )
+      <div className={styles.searchResults}>{this.props.content}</div>
+    )
   } 
 }

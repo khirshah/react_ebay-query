@@ -2,6 +2,9 @@
 //----------------------- React -----------------------------------
 import React, { Component} from "react";
 
+//------------------------- axios --------------------------------
+const axios = require('axios');
+
 //------------------------- styles --------------------------------
 import styles from "./app.css";
 
@@ -14,7 +17,28 @@ import SearchResults from "./components/SearchResults.js"
 
 export default class App extends Component{
   state = {
-    displayMode: "search"
+    isResultsVisible: false,
+    results: "These are the results"
+  }
+
+  handleSearch = () => {
+      axios({
+        url: "http://localhost:3010/getData",
+        method: "post",
+        data: {
+          keyword: "arkham"
+        }
+      }).then(
+        response => {
+          this.setState({
+            isResultsVisible: true,
+            results: response.data
+          })
+        },
+        error => {
+          console.log(error);
+        }
+      )
   }
 
   render(){
@@ -22,9 +46,9 @@ export default class App extends Component{
       <div className={styles.app}>
         <div className={styles.appContainer}>
           <div className={styles.appTitle}>Ebay Search</div>
-          {this.state.displayMode == "search" ? <SearchContainer/> : null}
-          {this.state.displayMode == "search" ? <Button className={styles.searchButton} label="Search"/>: null}
-          {this.state.displayMode != "search" ? <SearchResults content="These are the results"/> : null}
+          <SearchContainer/>
+          <Button className={styles.searchButton} label="Search" onclick={this.handleSearch.bind(this)} />
+          {this.state.isResultsVisible && <SearchResults content={this.state.results}/>}
         </div>
       </div>
     );
