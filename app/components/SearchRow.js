@@ -14,8 +14,8 @@ export default class SearchRow extends Component{
   render() {
     return (
         <div className={styles.searchRow}>
-          <InputField/>
-          <DropDown/>
+          <InputField inputchange={this.props.inputchange} itemkey={this.props.itemkey}/>
+          <DropDown inputchange={this.props.inputchange} itemkey={this.props.itemkey}/>
         </div>
       )
   } 

@@ -21,12 +21,26 @@ export default class App extends Component{
     results: "These are the results"
   }
 
-  handleSearch = () => {
+  handleSearch = (formData) => {
+    let keyword=""
+    let limit=5
+
+    formData.map(i => {
+      if (i.field == "title") {
+        keyword += `${i.content},`
+      }
+      else if (i.field == "limit"){
+        limit = i.content
+      }
+    })
+
+    if(keyword != "") {
       axios({
         url: "http://localhost:3010/getData",
         method: "post",
         data: {
-          keyword: "arkham"
+          keyword: keyword,
+          limit: limit
         }
       }).then(
         response => {
@@ -39,6 +53,10 @@ export default class App extends Component{
           console.log(error);
         }
       )
+    }
+    else{
+      alert("No search keyword has been provided!")
+    }
   }
 
   render(){
@@ -46,8 +64,7 @@ export default class App extends Component{
       <div className={styles.app}>
         <div className={styles.appContainer}>
           <div className={styles.appTitle}>Ebay Search</div>
-          <SearchContainer/>
-          <Button className={styles.searchButton} label="Search" onclick={this.handleSearch.bind(this)} />
+          <SearchContainer buttonclick={this.handleSearch.bind(this)}/>
           {this.state.isResultsVisible && <SearchResults content={this.state.results}/>}
         </div>
       </div>
