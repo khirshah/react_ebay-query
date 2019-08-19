@@ -64,3 +64,4 @@ package-lock.json
 .env
 server/cURL.txt
 server/refreshTokenReq.js
+server/responseformat.json

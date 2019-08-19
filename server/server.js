@@ -19,8 +19,6 @@ var accessTokenData = {};
 
 //----------------- data handler function ----------------
 
-const keyword = "Arkham horror"
-
 function filterData(data) {
   let filteredData = data.itemSummaries.map((i)=>{
     return i.title
@@ -44,14 +42,15 @@ app.get('/', (req, res) => {
   res.send('Hello there! Use the /getData endpoint to make queries.');
 })
 
-app.get('/getData', asyncHandler(async (req, res, next) => {
+app.post('/getData', asyncHandler(async (req, res, next) => {
 
   if (_.isEmpty(accessTokenData || accessTokenData.date - Date.now() > (2*60*60*1000))) {
-
+    console.log("----- requesting user access token -----")
     accessTokenData = await accessTokenReq();
   }
-
-  fetch(`https://api.ebay.com/buy/browse/v1/item_summary/search?q=${keyword}&limit=10`, {
+  console.log("----- calling Ebay API -----")
+  console.log(req.body.keyword, req.body.limit)
+  fetch(`https://api.ebay.com/buy/browse/v1/item_summary/search?q=${req.body.keyword}&limit=${req.body.limit}`, {
     headers: {
         Authorization: `Bearer ${accessTokenData.token}`
       }
