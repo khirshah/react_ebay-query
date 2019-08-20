@@ -21,7 +21,13 @@ var accessTokenData = {};
 
 function filterData(data) {
   let filteredData = data.itemSummaries.map((i)=>{
-    return i.title
+    return {
+      title: i.title,
+      image: i.image,
+      price: i.price,
+      ref: i.itemWebUrl,
+      loc: i.itemLocation
+    }
   })
   return filteredData;
 }
@@ -63,7 +69,7 @@ app.post('/getData', asyncHandler(async (req, res, next) => {
         res.send(processedData);
       }
       else {
-        res.send();
+        res.send("Something went wrong");
       }
   });
 

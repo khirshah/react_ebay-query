@@ -9,7 +9,6 @@ const axios = require('axios');
 import styles from "./app.css";
 
 //---------------------- components -------------------------------
-import Button from "./components/Button.js"
 import SearchContainer from "./components/SearchContainer.js"
 import SearchResults from "./components/SearchResults.js"
 
@@ -27,10 +26,10 @@ export default class App extends Component{
 
     formData.map(i => {
       if (i.field == "title") {
-        keyword += `${i.content},`
+        keyword += `${i.content.trim().replace(" ",",")},`
       }
       else if (i.field == "limit"){
-        limit = i.content
+        limit = i.content.trim()
       }
     })
 

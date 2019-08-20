@@ -1,0 +1,31 @@
+.resultRow {
+  background-color: white;
+  color: #191919;
+  margin: 5px;
+  padding: 10px;
+  border-radius:5px;
+}
+.titleContainer {
+  margin-bottom: 10px;
+}
+
+.title{
+  font-size: 1.2rem;
+}
+.title:link{
+  color: #191919;
+  text-decoration: none;
+}
+
+.title:link:active, .title:visited, .title:visited:active {
+  color: #4C4C4C;
+}
+
+.details{
+  display: flex;
+  flex-direction: row;
+}
+
+.infoBox {
+  padding:30px;
+}
