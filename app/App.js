@@ -43,10 +43,15 @@ export default class App extends Component{
         }
       }).then(
         response => {
-          this.setState({
-            isResultsVisible: true,
-            results: response.data
-          })
+          if (typeof response != "string") {
+            this.setState({
+              isResultsVisible: true,
+              results: response.data
+            })
+          }
+          else{
+            alert("Something went wrong, please try again!")
+          }
         },
         error => {
           console.log(error);

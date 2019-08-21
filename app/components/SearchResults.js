@@ -12,7 +12,6 @@ import ResultRow from "./ResultRow.js"
 export default class SearchResults extends Component{
 
   handleIncomingData = () => {
-    console.log(this.props.content)
     let rows = this.props.content.map((item, index) => {
       return <ResultRow key={index} content={item}/>
     })
