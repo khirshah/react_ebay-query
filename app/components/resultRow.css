@@ -1,12 +1,15 @@
 .resultRow {
+  display: flex;
+  flex-direction: row;
   background-color: white;
   color: #191919;
-  margin: 5px;
+  margin: 10px;
   padding: 10px;
   border-radius:5px;
 }
 .titleContainer {
   margin-bottom: 10px;
+  padding-left: 20px;
 }
 
 .title{
@@ -18,14 +21,21 @@
 }
 
 .title:link:active, .title:visited, .title:visited:active {
-  color: #4C4C4C;
-}
-
-.details{
-  display: flex;
-  flex-direction: row;
+  color: #666666;
 }
 
 .infoBox {
-  padding:30px;
+  display: flex;
+  flex-direction: column;
+  padding-left:20px;
+  justify-content: center;
+  color: #4C4C4C;
+}
+
+.imgContainer {
+  min-width: 120px;
+}
+
+img {
+  max-width:100px;
 }
