@@ -5,6 +5,9 @@ import React, { Component} from "react";
 //------------------------- axios --------------------------------
 const axios = require('axios');
 
+//------------------------- redux --------------------------------
+import "./reducer/reducer.js"
+
 //------------------------- styles --------------------------------
 import styles from "./app.css";
 
