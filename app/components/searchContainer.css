@@ -1,0 +1,15 @@
+.searchContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonsContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.searchButton {
+  width: 200px;
+  margin: 8px auto 8px auto;
+}

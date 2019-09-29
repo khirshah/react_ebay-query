@@ -59,4 +59,10 @@ typings/
 
 # next.js build output
 .next
+
 package-lock.json
+.env
+server/cURL.txt
+server/refreshTokenReq.js
+server/responseformat.json
+
