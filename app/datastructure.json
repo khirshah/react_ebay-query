@@ -1,0 +1,6 @@
+{ title: 'Title',
+  price: { value: '12.99', currency: 'USD' },
+  itemLocation: { postalCode: '90011', country: 'US' }
+  limit: 'Number of items'
+}
+

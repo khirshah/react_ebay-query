@@ -1,0 +1,30 @@
+{ itemId: 'v1|264379882987|0',
+  title: 'Arkham Horror LCG Carnevale of Horrors',
+  image: 
+   { imageUrl: 'https://i.ebayimg.com/thumbs/images/g/SU8AAOSwlNtdFim4/s-l225.jpg' },
+  price: { value: '12.99', currency: 'USD' },
+  itemHref: 'https://api.ebay.com/buy/browse/v1/item/v1|264379882987|0',
+  seller: 
+   { username: '123redtags',
+     feedbackPercentage: '99.7',
+     feedbackScore: 1952 },
+  marketingPrice: 
+   { originalPrice: { value: '13.24', currency: 'USD' },
+     discountPercentage: '1',
+     discountAmount: { value: '0.25', currency: 'USD' } },
+  condition: 'New',
+  conditionId: '1000',
+  thumbnailImages: 
+   [ { imageUrl: 'https://i.ebayimg.com/00/s/NTAwWDM1MA==/z/SU8AAOSwlNtdFim4/$_0.JPG?set_id=8800005007' } ],
+  shippingOptions: [ { shippingCostType: 'FIXED', shippingCost: [Object] } ],
+  buyingOptions: [ 'FIXED_PRICE' ],
+  currentBidPrice: { value: '12.99', currency: 'USD' },
+  epid: '596777311',
+  itemWebUrl: 'https://www.ebay.com/itm/Arkham-Horror-LCG-Carnevale-of-Horrors/264379882987?hash=item3d8e44ddeb:g:SU8AAOSwlNtdFim4',
+  itemLocation: { postalCode: '90011', country: 'US' },
+  categories: 
+   [ { categoryId: '180349' },
+     { categoryId: '220' },
+     { categoryId: '233' },
+     { categoryId: '2550' } ],
+  adultOnly: false }
