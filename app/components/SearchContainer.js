@@ -1,6 +1,8 @@
 //----------------------- IMPORT --------------------------------------
 //----------------------- React -----------------------------------
 import React, { Component} from "react";
+import { connect } from 'react-redux';
+import reducer from '../reducer/reducer.js'
 
 //------------------------- styles --------------------------------
 import styles from "./searchContainer.css";
@@ -10,9 +12,10 @@ import SearchRow from "./SearchRow.js"
 import Button from "./Button.js"
 
 //---------------------- COMPONENT -------------------------------
-export default class SearchContainer extends Component {
+class SearchContainer extends Component {
     
     state = {
+      id: 1,
       formData: [{
         content: "",
         field: ""
@@ -20,6 +23,10 @@ export default class SearchContainer extends Component {
     }
 
   handleinputFieldChange = (key,value, target) => {
+    this.props.dispatch({
+      type: 'INPUT_FIELD_CHANGE',
+      value: value,
+      id: target})
     var {formData} = this.state
     formData[key][target]= value
     this.setState({
@@ -28,6 +35,10 @@ export default class SearchContainer extends Component {
   }
 
   handleAddSearchRow = () => {
+    this.props.dispatch({
+      type: 'ADD_SEARCH_ROW',
+      id: this.state.id++
+    })
     this.setState({formData: 
       this.state.formData.concat([{
         content: "",
@@ -51,6 +62,7 @@ export default class SearchContainer extends Component {
   }
 
   render() {
+    console.log("SearchContainer.props: ",this.props)
     return (
         <div className={styles.searchContainer} >
           {this.createSearchRows()}
@@ -63,3 +75,14 @@ export default class SearchContainer extends Component {
       )
   } 
 }
+
+/*const mapDispatchToProps = {
+  signin
+}*/
+
+const mapStateToProps = (state) => {
+  return {state: state}
+}
+
+//console.log(connect)
+export default connect(mapStateToProps/*, mapDispatchToProps*/)(SearchContainer)

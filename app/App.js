@@ -5,9 +5,6 @@ import React, { Component} from "react";
 //------------------------- axios --------------------------------
 const axios = require('axios');
 
-//------------------------- redux --------------------------------
-import "./reducer/reducer.js"
-
 //------------------------- styles --------------------------------
 import styles from "./app.css";
 
@@ -67,6 +64,7 @@ export default class App extends Component{
   }
 
   render(){
+    //console.log("app.props: ", this.props)
     return(
       <div className={styles.app}>
         <div className={styles.appContainer}>
