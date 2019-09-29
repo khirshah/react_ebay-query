@@ -34,8 +34,8 @@ export default class App extends Component{
     })
 
     if(keyword != "") {
-      axios({
-        url: "http://localhost:3010/getData",
+      axios({ //https://agi-ebay-query-server.herokuapp.com/ , http://localhost:3010/getData
+        url: "https://agi-ebay-query-server.herokuapp.com/",
         method: "post",
         data: {
           keyword: keyword,
