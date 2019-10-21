@@ -27,7 +27,7 @@ class SearchContainer extends Component {
       type: 'INPUT_FIELD_CHANGE',
       value: value,
       id: key})
-    var {formData} = this.state
+    let {formData} = this.state
     formData.content[key]= value
     this.setState({
       formData: formData
@@ -35,7 +35,7 @@ class SearchContainer extends Component {
   }
 
   handleRowsNumChange = (value) => {
-    var {formData} = this.state
+    let {formData} = this.state
     formData.limit = value
     this.setState({
       formData: formData
@@ -47,17 +47,21 @@ class SearchContainer extends Component {
       type: 'ADD_SEARCH_ROW',
       id: this.state.id++
     })
-    var {formData} = this.state
+    let {formData} = this.state
     formData.content= formData.content.concat([""])
     this.setState({formData: formData})
   }
   
   handleRemoveSearchRow = () => {
-    this.setState({
-      formData: this.state.formData.content.filter((i, index) => {
-        return index != (this.state.formData.content.length-1)
+    if (this.state.formData.content.length > 1) {
+      let {formData} = this.state
+      formData.content = formData.content.filter((i, index) => {
+          return index != (this.state.formData.content.length-1)
+        })
+      this.setState({
+        formData: formData
       })
-    })
+    }
   }
 
   createSearchRows = () => {
