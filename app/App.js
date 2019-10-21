@@ -22,15 +22,10 @@ export default class App extends Component{
 
   handleSearch = (formData) => {
     let keyword=""
-    let limit=5
+    let limit=formData.limit
 
-    formData.map(i => {
-      if (i.field == "title") {
-        keyword += `${i.content.trim().replace(" ",",")},`
-      }
-      else if (i.field == "limit"){
-        limit = i.content.trim()
-      }
+    formData.content.map(i => {
+      keyword += `${i.trim().replace(" ",",")},`  
     })
 
     if(keyword != "") {
@@ -63,8 +58,7 @@ export default class App extends Component{
     }
   }
 
-  render(){
-    //console.log("app.props: ", this.props)
+  render() {
     return(
       <div className={styles.app}>
         <div className={styles.appContainer}>

@@ -16,19 +16,27 @@ class SearchContainer extends Component {
     
     state = {
       id: 1,
-      formData: [{
-        content: "",
-        field: ""
-      }],
+      formData: {
+        content: [""],
+        limit: 5
+      }
     }
 
-  handleinputFieldChange = (key,value, target) => {
+  handleinputFieldChange = (key,value) => {
     this.props.dispatch({
       type: 'INPUT_FIELD_CHANGE',
       value: value,
-      id: target})
+      id: key})
     var {formData} = this.state
-    formData[key][target]= value
+    formData.content[key]= value
+    this.setState({
+      formData: formData
+    })
+  }
+
+  handleRowsNumChange = (value) => {
+    var {formData} = this.state
+    formData.limit = value
     this.setState({
       formData: formData
     })
@@ -39,23 +47,22 @@ class SearchContainer extends Component {
       type: 'ADD_SEARCH_ROW',
       id: this.state.id++
     })
-    this.setState({formData: 
-      this.state.formData.concat([{
-        content: "",
-        field: ""
-      }])})
+    var {formData} = this.state
+    formData.content= formData.content.concat([""])
+    this.setState({formData: formData})
   }
   
   handleRemoveSearchRow = () => {
     this.setState({
-      formData: this.state.formData.filter((i, index) => {
-        return index != (this.state.formData.length-1)
+      formData: this.state.formData.content.filter((i, index) => {
+        return index != (this.state.formData.content.length-1)
       })
     })
   }
 
   createSearchRows = () => {
-    const rows = this.state.formData.map((i, index) => {
+    console.log(this.state)
+    const rows = this.state.formData.content.map((i, index) => {
       return <SearchRow key={index} itemkey={index}  inputchange={this.handleinputFieldChange.bind(this)}/>
     })
     return rows
@@ -67,9 +74,10 @@ class SearchContainer extends Component {
         <div className={styles.searchContainer} >
           {this.createSearchRows()}
           <div className={styles.buttonsContainer}>
-          <Button className={styles.btn} onclick={this.handleAddSearchRow.bind(this)} label="More"/>
-          <Button className={styles.btn} onclick={this.handleRemoveSearchRow.bind(this)} label="Less"/>
+            <Button className={styles.btn} onclick={this.handleAddSearchRow.bind(this)} label="More"/>
+            <Button className={styles.btn} onclick={this.handleRemoveSearchRow.bind(this)} label="Less"/>
           </div>
+          <input className={styles.limit} placeholder="#items" onChange={(event) => this.handleRowsNumChange(event.target.value)}></input>
           <Button className={styles.searchButton} label="Search" onclick={() => this.props.buttonclick(this.state.formData)} />
         </div>
       )
