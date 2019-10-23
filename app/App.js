@@ -17,7 +17,8 @@ import SearchResults from "./components/SearchResults.js"
 export default class App extends Component{
   state = {
     isResultsVisible: false,
-    results: "These are the results"
+    results: "These are the results",
+    isSearchComplete: false
   }
 
   handleSearch = (formData) => {
@@ -41,7 +42,8 @@ export default class App extends Component{
           if (typeof response != "string") {
             this.setState({
               isResultsVisible: true,
-              results: response.data
+              results: response.data,
+              isSearchComplete: true
             })
           }
           else{
@@ -58,12 +60,18 @@ export default class App extends Component{
     }
   }
 
+  setSearchComplete = (val) => {
+    this.setState({
+      isSearchComplete: val
+    })
+  }
+
   render() {
     return(
       <div className={styles.app}>
         <div className={styles.appContainer}>
           <div className={styles.appTitle}>Ebay Search</div>
-          <SearchContainer buttonclick={this.handleSearch.bind(this)}/>
+          <SearchContainer buttonclick={this.handleSearch.bind(this)} setSearchComplete={this.setSearchComplete.bind(this)} isSearchComplete={this.state.isSearchComplete}/>
           {this.state.isResultsVisible && <SearchResults content={this.state.results}/>}
         </div>
       </div>
