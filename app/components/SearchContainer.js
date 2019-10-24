@@ -10,6 +10,7 @@ import styles from "./searchContainer.css";
 //---------------------- components -------------------------------
 import SearchRow from "./SearchRow.js"
 import Button from "./Button.js"
+import DropDown from "./DropDown.js"
 
 //---------------------- COMPONENT -------------------------------
 class SearchContainer extends Component {
@@ -18,7 +19,8 @@ class SearchContainer extends Component {
       id: 1,
       formData: {
         content: [""],
-        limit: 5
+        limit: 5,
+        country: ""
       }
     }
 
@@ -34,9 +36,17 @@ class SearchContainer extends Component {
     })
   }
 
-  handleRowsNumChange = (value) => {
+  handleLimitChange = (value) => {
     let {formData} = this.state
     formData.limit = value
+    this.setState({
+      formData: formData
+    })
+  }
+
+  handleCountryChange = (value) => {
+    let {formData} = this.state
+    formData.country = value
     this.setState({
       formData: formData
     })
@@ -48,7 +58,7 @@ class SearchContainer extends Component {
       id: this.state.id++
     })
     let {formData} = this.state
-    formData.content= formData.content.concat([""])
+    formData.content = formData.content.concat([""])
     this.setState({formData: formData})
   }
   
@@ -64,19 +74,21 @@ class SearchContainer extends Component {
     }
   }
 
-  createSearchRows = () => {
-    console.log(this.state)
-    const rows = this.state.formData.content.map((i, index) => {
-      return <SearchRow key={index} itemkey={index} value={this.state.formData.content[index]}  inputchange={this.handleinputFieldChange.bind(this)}/>
+  createSearchRows = (data) => {
+    console.log(data)
+    const rows = data.content.map((i, index) => {
+      return <SearchRow key={index} itemkey={index} value={data.content[index]}  inputchange={this.handleinputFieldChange.bind(this)}/>
     })
     return rows
   }
 
   resetSearch = () => {
     this.setState({
+      id: 1,
       formData: {
         content: [""],
-        limit: 5
+        limit: 5,
+        country: ""
       }
     })
     this.props.setSearchComplete(false)
@@ -92,12 +104,13 @@ class SearchContainer extends Component {
     //console.log("SearchContainer.props: ",this.props)
     return (
         <div className={styles.searchContainer} >
-          {this.createSearchRows()}
+          {this.createSearchRows(this.state.formData)}
           <div className={styles.buttonsContainer}>
             <Button className={styles.btn} onclick={this.handleAddSearchRow.bind(this)} label="More"/>
             <Button className={styles.btn} onclick={this.handleRemoveSearchRow.bind(this)} label="Less"/>
           </div>
-          <input className={styles.limit} placeholder="#items" onChange={(event) => this.handleRowsNumChange(event.target.value)}></input>
+          <DropDown ddchange={this.handleCountryChange.bind(this)}/>
+          <input className={styles.limit} placeholder="#items" onChange={(event) => this.handleLimitChange(event.target.value)}></input>
           <Button 
             className={styles.searchButton} 
             label="Search" 

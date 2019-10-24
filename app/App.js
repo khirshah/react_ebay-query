@@ -22,24 +22,26 @@ export default class App extends Component{
   }
 
   handleSearch = (formData) => {
-    let keyword=""
-    let limit=formData.limit
+    let keyword="";
+    let limit=formData.limit;
+    let country=formData.country;
 
     formData.content.map(i => {
       keyword += `${i.trim().replace(" ",",")},`  
     })
 
     if(keyword != "") {
-      axios({ //https://agi-ebay-query-server.herokuapp.com/ , http://localhost:3010/getData
-        url: "https://agi-ebay-query-server.herokuapp.com/getData",
+      axios({ //https://agi-ebay-query-server.herokuapp.com/getData , http://localhost:3010/getData
+        url: "http://localhost:3010/getData",
         method: "post",
         data: {
           keyword: keyword,
+          country: country,
           limit: limit
         }
       }).then(
         response => {
-          if (typeof response != "string") {
+          if (typeof response.data != "string") {
             this.setState({
               isResultsVisible: true,
               results: response.data,
@@ -47,7 +49,7 @@ export default class App extends Component{
             })
           }
           else{
-            alert("Something went wrong, please try again!")
+            alert("You have probably misspelled the keyword(s) or there are no search results with these settings. Edit your search and try again!")
           }
         },
         error => {

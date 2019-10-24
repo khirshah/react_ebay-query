@@ -54,7 +54,11 @@ app.post('/getData', asyncHandler(async (req, res, next) => {
     accessTokenData = await accessTokenReq();
   }
   console.log("----- calling Ebay API -----")
-  fetch(`https://api.ebay.com/buy/browse/v1/item_summary/search?q=${req.body.keyword}&limit=${req.body.limit}`, {
+  let searchString=`https://api.ebay.com/buy/browse/v1/item_summary/search?q=${req.body.keyword}&limit=${req.body.limit}`
+  if (req.body.country != "") {
+    searchString = searchString+`&filter=itemLocationCountry:${req.body.country}`
+  }
+  fetch(searchString, {
     headers: {
         Authorization: `Bearer ${accessTokenData.token}`
       }

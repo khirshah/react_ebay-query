@@ -66,3 +66,4 @@ server/cURL.txt
 server/refreshTokenReq.js
 server/responseformat.json
 app/datastructure.json
+app/data
