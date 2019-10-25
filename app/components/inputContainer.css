@@ -1,0 +1,14 @@
+.inputContainer{
+  display: flex;
+  flex-direction: row;
+}
+.textContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.text{
+  padding-left: 20px;
+  margin: 0px;
+}

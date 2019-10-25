@@ -22,14 +22,9 @@ export default class App extends PureComponent{
   }
 
   handleSearch = (formData) => {
-    let keyword="";
+    let keyword = formData.keyword.trim().replace(/\s/g,",");
     let limit=formData.limit;
     let country=formData.country;
-
-    formData.content.map(i => {
-      keyword += `${i.trim().replace(/\s/g,",")},`  
-    })
-    keyword = keyword.slice(0,-1);
 
     if(keyword != "") {
       axios({ //https://agi-ebay-query-server.herokuapp.com/getData , http://localhost:3010/getData
@@ -79,7 +74,8 @@ export default class App extends PureComponent{
     return(
       <div className={styles.app}>
         <div className={styles.appContainer}>
-          <div className={styles.appTitle}>Ebay Search</div>
+          <div className={styles.appTitle}>ebay search</div>
+          <div className={styles.subTitle}>This app uses the ebay public API.</div>
           <SearchContainer buttonclick={this.handleSearch.bind(this)} setSearchComplete={this.setSearchComplete.bind(this)} isSearchComplete={this.state.isSearchComplete}/>
           {this.state.isResultsVisible && <SearchResults content={this.state.results} searchDetails={this.state.searchDetails}/>}
         </div>

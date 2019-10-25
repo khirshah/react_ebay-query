@@ -26,3 +26,8 @@
   text-align: center;
   margin: 0 auto;
 }
+
+.subTitle {
+  text-align: center;
+  font-weight: bold;
+}

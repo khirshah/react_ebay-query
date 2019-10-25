@@ -3,13 +3,19 @@
 import React, {PureComponent} from "react";
 
 //------------------------- styles --------------------------------
-import styles from "./button.css";
+import styles from "./inputContainer.css";
 
 //---------------------- COMPONENT -------------------------------
-export default class Button extends PureComponent{
+export default class InputContainer extends PureComponent{
+
   render() {
     return (
-      <button className={this.props.className} onClick={this.props.onclick}>{this.props.label}</button>
-      )
+      <div className={styles.inputContainer}>
+        {this.props.children}
+        <div className={styles.textContainer}>
+          <p className={styles.text}>{this.props.text}</p>
+        </div>
+      </div>
+    )
   } 
 }

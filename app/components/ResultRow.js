@@ -1,12 +1,12 @@
 //----------------------- IMPORT --------------------------------------
 //----------------------- React -----------------------------------
-import React, { Component, Linking} from "react";
+import React, {PureComponent, Linking} from "react";
 
 //------------------------- styles --------------------------------
 import styles from "./resultRow.css";
 
 //---------------------- COMPONENT -------------------------------
-export default class ResultRow extends Component{
+export default class ResultRow extends PureComponent{
 
   render() {
     return (

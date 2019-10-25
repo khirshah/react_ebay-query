@@ -1,15 +1,15 @@
 //----------------------- IMPORT --------------------------------------
 //----------------------- React -----------------------------------
-import React, { Component} from "react";
+import React, {PureComponent} from "react";
 
 //------------------------- styles --------------------------------
 import styles from "./inputField.css";
 
 //---------------------- COMPONENT -------------------------------
-export default class InputField extends Component{
+export default class InputField extends PureComponent{
   render() {
     return (
-      <input className={styles.inputField} placeholder={this.props.placeholder} onChange={(event) => this.props.inputchange(this.props.itemkey,event.target.value)}></input>
+      <input className={styles.inputField} placeholder={this.props.placeholder} onChange={(event) => this.props.inputchange(event.target.value)}></input>
     )
   } 
 }

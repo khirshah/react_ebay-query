@@ -1,6 +1,6 @@
 //----------------------- IMPORT --------------------------------------
 //----------------------- React -----------------------------------
-import React, { Component} from "react";
+import React, {PureComponent} from "react";
 
 //------------------------- styles --------------------------------
 import styles from "./searchRow.css";
@@ -9,7 +9,7 @@ import styles from "./searchRow.css";
 import InputField from "./InputField.js"
 
 //---------------------- COMPONENT -------------------------------
-export default class SearchRow extends Component{
+export default class SearchRow extends PureComponent{
   render() {
     return (
         <div className={styles.searchRow}>

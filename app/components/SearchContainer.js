@@ -1,6 +1,6 @@
 //----------------------- IMPORT --------------------------------------
 //----------------------- React -----------------------------------
-import React, { Component} from "react";
+import React, {Component} from "react";
 import { connect } from 'react-redux';
 import reducer from '../reducer/reducer.js'
 
@@ -10,27 +10,27 @@ import styles from "./searchContainer.css";
 //---------------------- components -------------------------------
 import SearchRow from "./SearchRow.js"
 import Button from "./Button.js"
+import InputContainer from "./InputContainer.js"
 import DropDown from "./DropDown.js"
 
 //---------------------- COMPONENT -------------------------------
 class SearchContainer extends Component {
     
     state = {
-      id: 1,
       formData: {
-        content: [""],
+        keyword: "",
         limit: 5,
         country: ""
       }
     }
 
-  handleinputFieldChange = (key,value) => {
+  handleinputFieldChange = (value) => {
     this.props.dispatch({
       type: 'INPUT_FIELD_CHANGE',
-      value: value,
-      id: key})
+      value: value
+    })
     let {formData} = this.state
-    formData.content[key]= value
+    formData.keyword = value
     this.setState({
       formData: formData
     })
@@ -52,42 +52,11 @@ class SearchContainer extends Component {
     })
   }
 
-  handleAddSearchRow = (event) => {
-    event.preventDefault()
-    this.props.dispatch({
-      type: 'ADD_SEARCH_ROW',
-      id: this.state.id++
-    })
-    let {formData} = this.state
-    formData.content = formData.content.concat([""])
-    this.setState({formData: formData})
-  }
-  
-  handleRemoveSearchRow = (event) => {
-    event.preventDefault()
-    if (this.state.formData.content.length > 1) {
-      let {formData} = this.state
-      formData.content = formData.content.filter((i, index) => {
-          return index != (this.state.formData.content.length-1)
-        })
-      this.setState({
-        formData: formData
-      })
-    }
-  }
-
-  createSearchRows = (data) => {
-    const rows = data.content.map((i, index) => {
-      return <SearchRow key={index} itemkey={index} inputchange={this.handleinputFieldChange.bind(this)}/>
-    })
-    return rows
-  }
-
   resetSearch = () => {
     this.setState({
       id: 1,
       formData: {
-        content: [""],
+        keyword: "",
         limit: 5,
         country: ""
       }
@@ -96,7 +65,7 @@ class SearchContainer extends Component {
     this.myFormRef.reset();
 
   }
-
+  
   componentDidUpdate = (prevProps, prevState, snapshot) => {
     if (prevProps.isSearchComplete != this.props.isSearchComplete) {
       this.resetSearch()
@@ -107,13 +76,13 @@ class SearchContainer extends Component {
     return (
         <div className={styles.searchContainer} >
           <form className={styles.searchForm}  ref={(el) => this.myFormRef = el} >
-            {this.createSearchRows(this.state.formData)}
-            <div className={styles.buttonsContainer}>
-              <Button className={styles.btn} onclick={this.handleAddSearchRow.bind(this)} label="More"/>
-              <Button className={styles.btn} onclick={this.handleRemoveSearchRow.bind(this)} label="Less"/>
-            </div>
-            <DropDown ddchange={this.handleCountryChange.bind(this)}/>
-            <input className={styles.limit} placeholder="#result rows" onChange={(event) => this.handleLimitChange(event.target.value)}></input>
+            <SearchRow inputchange={this.handleinputFieldChange.bind(this)}/>
+            <InputContainer text="if you want to search in a specific country (optional)">
+              <DropDown ddchange={this.handleCountryChange.bind(this)}/>
+            </InputContainer>
+            <InputContainer text="number of result rows to show (default:5)">
+              <input className={styles.limit} placeholder="#results" onChange={(event) => this.handleLimitChange(event.target.value)}></input>
+            </InputContainer>
           </form>
             <Button 
               className={styles.searchButton} 
