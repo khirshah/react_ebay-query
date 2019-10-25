@@ -1,6 +1,6 @@
 //----------------------- IMPORT --------------------------------------
 //----------------------- React -----------------------------------
-import React, { Component} from "react";
+import React, {PureComponent} from "react";
 
 //------------------------- axios --------------------------------
 const axios = require('axios');
@@ -14,11 +14,11 @@ import SearchResults from "./components/SearchResults.js"
 
 //---------------------- COMPONENT -------------------------------
 
-export default class App extends Component{
+export default class App extends PureComponent{
   state = {
     isResultsVisible: false,
-    results: "These are the results",
-    isSearchComplete: false
+    isSearchComplete: false,
+    results: "These are the results"
   }
 
   handleSearch = (formData) => {
@@ -27,8 +27,9 @@ export default class App extends Component{
     let country=formData.country;
 
     formData.content.map(i => {
-      keyword += `${i.trim().replace(" ",",")},`  
+      keyword += `${i.trim().replace(/\s/g,",")},`  
     })
+    keyword = keyword.slice(0,-1);
 
     if(keyword != "") {
       axios({ //https://agi-ebay-query-server.herokuapp.com/getData , http://localhost:3010/getData
@@ -42,10 +43,16 @@ export default class App extends Component{
       }).then(
         response => {
           if (typeof response.data != "string") {
+            console.log(keyword,keyword.replace(/,/g,", "))
             this.setState({
               isResultsVisible: true,
+              isSearchComplete: true,
               results: response.data,
-              isSearchComplete: true
+              searchDetails: {
+                limit: limit,
+                keyword: keyword.replace(/,/g,", "),
+                country: country
+              }
             })
           }
           else{
@@ -74,7 +81,7 @@ export default class App extends Component{
         <div className={styles.appContainer}>
           <div className={styles.appTitle}>Ebay Search</div>
           <SearchContainer buttonclick={this.handleSearch.bind(this)} setSearchComplete={this.setSearchComplete.bind(this)} isSearchComplete={this.state.isSearchComplete}/>
-          {this.state.isResultsVisible && <SearchResults content={this.state.results}/>}
+          {this.state.isResultsVisible && <SearchResults content={this.state.results} searchDetails={this.state.searchDetails}/>}
         </div>
       </div>
     );

@@ -52,7 +52,8 @@ class SearchContainer extends Component {
     })
   }
 
-  handleAddSearchRow = () => {
+  handleAddSearchRow = (event) => {
+    event.preventDefault()
     this.props.dispatch({
       type: 'ADD_SEARCH_ROW',
       id: this.state.id++
@@ -62,7 +63,8 @@ class SearchContainer extends Component {
     this.setState({formData: formData})
   }
   
-  handleRemoveSearchRow = () => {
+  handleRemoveSearchRow = (event) => {
+    event.preventDefault()
     if (this.state.formData.content.length > 1) {
       let {formData} = this.state
       formData.content = formData.content.filter((i, index) => {
@@ -75,9 +77,8 @@ class SearchContainer extends Component {
   }
 
   createSearchRows = (data) => {
-    console.log(data)
     const rows = data.content.map((i, index) => {
-      return <SearchRow key={index} itemkey={index} value={data.content[index]}  inputchange={this.handleinputFieldChange.bind(this)}/>
+      return <SearchRow key={index} itemkey={index} inputchange={this.handleinputFieldChange.bind(this)}/>
     })
     return rows
   }
@@ -91,7 +92,9 @@ class SearchContainer extends Component {
         country: ""
       }
     })
-    this.props.setSearchComplete(false)
+    this.props.setSearchComplete(false);
+    this.myFormRef.reset();
+
   }
 
   componentDidUpdate = (prevProps, prevState, snapshot) => {
@@ -101,20 +104,21 @@ class SearchContainer extends Component {
   }
 
   render() {
-    //console.log("SearchContainer.props: ",this.props)
     return (
         <div className={styles.searchContainer} >
-          {this.createSearchRows(this.state.formData)}
-          <div className={styles.buttonsContainer}>
-            <Button className={styles.btn} onclick={this.handleAddSearchRow.bind(this)} label="More"/>
-            <Button className={styles.btn} onclick={this.handleRemoveSearchRow.bind(this)} label="Less"/>
-          </div>
-          <DropDown ddchange={this.handleCountryChange.bind(this)}/>
-          <input className={styles.limit} placeholder="#items" onChange={(event) => this.handleLimitChange(event.target.value)}></input>
-          <Button 
-            className={styles.searchButton} 
-            label="Search" 
-            onclick={() => {this.props.buttonclick(this.state.formData)}}/>
+          <form className={styles.searchForm}  ref={(el) => this.myFormRef = el} >
+            {this.createSearchRows(this.state.formData)}
+            <div className={styles.buttonsContainer}>
+              <Button className={styles.btn} onclick={this.handleAddSearchRow.bind(this)} label="More"/>
+              <Button className={styles.btn} onclick={this.handleRemoveSearchRow.bind(this)} label="Less"/>
+            </div>
+            <DropDown ddchange={this.handleCountryChange.bind(this)}/>
+            <input className={styles.limit} placeholder="#result rows" onChange={(event) => this.handleLimitChange(event.target.value)}></input>
+          </form>
+            <Button 
+              className={styles.searchButton} 
+              label="Search" 
+              onclick={() => {this.props.buttonclick(this.state.formData)}}/>
         </div>
       )
   } 

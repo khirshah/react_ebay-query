@@ -3,4 +3,12 @@
   border-radius:5px;
   border: solid 3px #4C4C4C;
   color: #333333;
+  display: flex;
+  flex-direction: column;
+}
+.searchResText{
+  text-align: center;
+  font-size: 1.5rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

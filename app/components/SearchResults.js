@@ -1,6 +1,6 @@
 //----------------------- IMPORT --------------------------------------
 //----------------------- React -----------------------------------
-import React, { Component} from "react";
+import React, {PureComponent} from "react";
 
 //------------------------- styles --------------------------------
 import styles from "./searchResults.css";
@@ -9,7 +9,7 @@ import styles from "./searchResults.css";
 import ResultRow from "./ResultRow.js"
 
 //---------------------- COMPONENT -------------------------------
-export default class SearchResults extends Component{
+export default class SearchResults extends PureComponent{
 
   handleIncomingData = () => {
     let rows = this.props.content.map((item, index) => {
@@ -21,6 +21,7 @@ export default class SearchResults extends Component{
   render() {
     return (
       <div className={styles.searchResults}>
+        <div className={styles.searchResText}>{`${this.props.searchDetails.limit} results for: ${this.props.searchDetails.keyword}`}</div>
         {this.handleIncomingData()}
       </div>
     )

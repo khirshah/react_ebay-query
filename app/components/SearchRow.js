@@ -13,7 +13,7 @@ export default class SearchRow extends Component{
   render() {
     return (
         <div className={styles.searchRow}>
-          <InputField inputchange={this.props.inputchange} value={this.props.value} itemkey={this.props.itemkey} placeholder="Type a keyword to search"/>
+          <InputField inputchange={this.props.inputchange} itemkey={this.props.itemkey} placeholder="Type a keyword to search"/>
         </div>
       )
   } 
