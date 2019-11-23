@@ -49,9 +49,16 @@ app.get('/', (req, res) => {
 })
 
 app.post('/getData', asyncHandler(async (req, res, next) => {
+  console.log("incoming request")
   if (Date.now() - accessTokenData.date > 2*60*60*1000 || _.isEmpty(accessTokenData)) {
     console.log("----- requesting user access token -----")
-    accessTokenData = await accessTokenReq();
+    try {
+      accessTokenData = await accessTokenReq();
+    }
+    catch(e) {
+      console.log(e);
+      res.send("Authentication faliure");
+    }
   }
   console.log("----- calling Ebay API -----")
   let searchString=`https://api.ebay.com/buy/browse/v1/item_summary/search?q=${req.body.keyword}&limit=${req.body.limit}`

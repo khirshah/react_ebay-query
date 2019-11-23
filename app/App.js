@@ -75,6 +75,7 @@ export default class App extends PureComponent{
       <div className={styles.app}>
         <div className={styles.appContainer}>
           <div className={styles.appTitle}>ebay search</div>
+          <div style={{color: "red"}}>I'm currently facing authentication issues with ebay, that I could not yet resoleved.</div>
           <div className={styles.subTitle}>This app uses the ebay public API.</div>
           <SearchContainer buttonclick={this.handleSearch.bind(this)} setSearchComplete={this.setSearchComplete.bind(this)} isSearchComplete={this.state.isSearchComplete}/>
           {this.state.isResultsVisible && <SearchResults content={this.state.results} searchDetails={this.state.searchDetails}/>}
