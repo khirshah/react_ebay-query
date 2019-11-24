@@ -13,7 +13,7 @@ function accessTokenReq() {
         "Authorization" : `Basic ${process.env.ENCODEDCREDS}`
       },
       data: 
-        `grant_type=refresh_token&refresh_token=${process.env.REFRESHTOKEN}&scope=${process.env.SCOPE}`
+        `grant_type=client_credentials&scope=https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope`
     }).then(
       response => {
         resolve({
